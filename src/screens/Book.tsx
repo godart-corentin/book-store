@@ -1,6 +1,7 @@
 import React from 'react'
 import {StatusBar, StyleSheet, Text, useColorScheme, View} from 'react-native'
 import {SafeAreaView} from 'react-native-safe-area-context'
+import Icon from 'react-native-vector-icons/Ionicons'
 
 export const BookScreen: React.FC<{}> = () => {
   const isDarkMode = useColorScheme() === 'dark'
@@ -9,7 +10,9 @@ export const BookScreen: React.FC<{}> = () => {
     <SafeAreaView style={styles.mainView}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
       <View style={styles.contentView}>
-        <Text style={styles.text}>Book</Text>
+        <Text style={styles.text}>
+          <Icon name="book-outline" size={16} /> Book
+        </Text>
       </View>
     </SafeAreaView>
   )

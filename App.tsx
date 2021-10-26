@@ -2,9 +2,10 @@ import React from 'react'
 import {NavigationContainer} from '@react-navigation/native'
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
 
-import {BookScreen, HomeScreen} from './src/screens'
+import {HomeScreen} from './src/screens'
+import {RootStackParamList} from './src/types'
 
-const Stack = createNativeStackNavigator()
+const Stack = createNativeStackNavigator<RootStackParamList>()
 
 export const App = () => {
   return (
@@ -13,11 +14,6 @@ export const App = () => {
         <Stack.Screen
           name="Home"
           component={HomeScreen}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Book"
-          component={BookScreen}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

@@ -1,5 +1,5 @@
 import {Book} from './types/book'
-import {fakeBooks} from './fakeData'
+import {fakeBooks} from '../fakeData'
 
 export class BookService {
   /*
@@ -15,9 +15,10 @@ export class BookService {
    * Fetch the popular books
    */
   static getPopularBooks(): Book[] {
-    return fakeBooks.sort(function (a, b) {
+    const popularBooks = [...fakeBooks]
+    return popularBooks.sort(function (a, b) {
       // Sort the books by popularity using the ratings property
-      return a.ratings < b.ratings ? -1 : a.ratings > b.ratings ? 1 : 0
+      return a.ratings < b.ratings ? 1 : a.ratings > b.ratings ? -1 : 0
     })
   }
 

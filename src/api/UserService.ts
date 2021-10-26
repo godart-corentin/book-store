@@ -1,5 +1,5 @@
 import {User} from '.'
-import {fakeUser} from './fakeData'
+import {fakeUser} from '../fakeData'
 
 export class UserService {
   /**

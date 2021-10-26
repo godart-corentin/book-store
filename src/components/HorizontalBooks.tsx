@@ -7,14 +7,8 @@ import {
   TouchableNativeFeedback,
   View,
 } from 'react-native'
-import Moment from 'moment'
-//import {NativeStackNavigationProp} from '@react-navigation/native-stack'
-//import {useNavigation} from '@react-navigation/core'
 
 import {Book} from '../api'
-//import {RootStackParamList} from '../types'
-
-Moment.locale()
 
 type Props = {
   title: string
@@ -22,14 +16,7 @@ type Props = {
   onClick: (book: Book) => void
 }
 
-// type ProfileScreenNavigationProp = NativeStackNavigationProp<
-//   RootStackParamList,
-//   'Book'
-// >
-
 export const HorizontalBooks: React.FC<Props> = ({title, books, onClick}) => {
-  //const navigation = useNavigation<ProfileScreenNavigationProp>()
-
   return (
     <View style={styles.wrapper}>
       <Text style={styles.title}>{title}</Text>

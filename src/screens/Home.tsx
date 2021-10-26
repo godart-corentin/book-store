@@ -1,4 +1,3 @@
-import {PortalProvider} from '@gorhom/portal'
 import React, {useEffect, useRef, useState} from 'react'
 import {
   StatusBar,
@@ -39,31 +38,29 @@ export const HomeScreen: React.FC<{}> = () => {
   }
 
   return (
-    <PortalProvider>
-      <SafeAreaView style={styles.mainView}>
-        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-        <ScrollView style={styles.contentView} nestedScrollEnabled>
-          <View style={styles.backgroundView}>
-            <HomeHeader />
-            <HorizontalBooks
-              title="Pour vous"
-              books={forUserBooks}
-              onClick={onOpenModal}
-            />
-          </View>
-          <BookList
-            title="Ouvrages populaires"
-            books={popularBooks}
+    <SafeAreaView style={styles.mainView}>
+      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      <ScrollView style={styles.contentView} nestedScrollEnabled>
+        <View style={styles.backgroundView}>
+          <HomeHeader />
+          <HorizontalBooks
+            title="Pour vous"
+            books={forUserBooks}
             onClick={onOpenModal}
           />
-        </ScrollView>
-        <BookBottomSheet
-          modalRef={modalRef}
-          onClose={onCloseModal}
-          book={selectedBook}
+        </View>
+        <BookList
+          title="Ouvrages les mieux notés"
+          books={popularBooks}
+          onClick={onOpenModal}
         />
-      </SafeAreaView>
-    </PortalProvider>
+      </ScrollView>
+      <BookBottomSheet
+        modalRef={modalRef}
+        onClose={onCloseModal}
+        book={selectedBook}
+      />
+    </SafeAreaView>
   )
 }
 

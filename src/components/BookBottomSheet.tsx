@@ -1,4 +1,4 @@
-import {Portal} from '@gorhom/portal'
+import {Portal} from 'react-native-portalize'
 import React from 'react'
 import {Dimensions, Image, StyleSheet, Text, View} from 'react-native'
 import {Modalize} from 'react-native-modalize'
@@ -22,6 +22,8 @@ export const BookBottomSheet: React.FC<Props> = ({book, modalRef, onClose}) => {
         ref={modalRef}
         modalHeight={modalHeight}
         childrenStyle={styles.childrenStyle}
+        modalStyle={styles.modalStyle}
+        rootStyle={styles.rootStyle}
         HeaderComponent={<CloseButton onClick={onClose} />}>
         <View style={styles.mainInfo}>
           {book && (
@@ -41,9 +43,18 @@ export const BookBottomSheet: React.FC<Props> = ({book, modalRef, onClose}) => {
 }
 
 const styles = StyleSheet.create({
+  rootStyle: {
+    zIndex: 9999,
+  },
+  modalStyle: {
+    borderTopLeftRadius: 32,
+    borderTopRightRadius: 32,
+  },
   childrenStyle: {
     backgroundColor: '#EBE3DB',
     flex: 1,
+    borderTopLeftRadius: 32,
+    borderTopRightRadius: 32,
   },
   mainInfo: {
     justifyContent: 'center',
@@ -62,7 +73,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Libre Caslon Text',
     fontWeight: '400',
     color: '#2C2F3D',
-    fontSize: 16,
+    textAlign: 'center',
+    fontSize: 20,
     maxWidth: 300,
     marginBottom: 8,
   },

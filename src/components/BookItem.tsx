@@ -7,50 +7,35 @@ import {
   View,
 } from 'react-native'
 import Icon from 'react-native-vector-icons/Ionicons'
-import Moment from 'moment'
-//import {NativeStackNavigationProp} from '@react-navigation/native-stack'
 
 import {Book} from '../api'
-//import {RootStackParamList} from '../types'
-//import {useNavigation} from '@react-navigation/core'
 
 type Props = {
   book: Book
   onClick: (book: Book) => void
 }
 
-Moment.locale()
-
-// type BookItemNavigationProp = NativeStackNavigationProp<
-//   RootStackParamList,
-//   'Book'
-// >
-
 export const BookItem: React.FC<Props> = ({book, onClick}): JSX.Element => {
-  //const navigation = useNavigation<BookItemNavigationProp>()
-
   return (
-    <View key={book.id} style={styles.wrapper}>
-      <TouchableNativeFeedback onPress={() => onClick(book)}>
+    <TouchableNativeFeedback key={book.id} onPress={() => onClick(book)}>
+      <View style={styles.wrapper}>
         <Image style={styles.bookCover} source={{uri: book.cover}} />
-      </TouchableNativeFeedback>
-      <View style={styles.mainInfo}>
-        <TouchableNativeFeedback onPress={() => onClick(book)}>
+        <View style={styles.mainInfo}>
           <Text style={styles.bookTitle} numberOfLines={1} ellipsizeMode="tail">
             {book.title}
           </Text>
-        </TouchableNativeFeedback>
 
-        <Text style={styles.bookAuthors}>{book.authors[0]}</Text>
-        <View style={styles.ratingsView}>
-          <Icon name="star" style={styles.ratingsIcon} size={14} />
+          <Text style={styles.bookAuthors}>{book.authors[0]}</Text>
+          <View style={styles.ratingsView}>
+            <Icon name="star" style={styles.ratingsIcon} size={14} />
 
-          <Text style={styles.bookRatings}>
-            {Number(book.ratings).toFixed(1)}
-          </Text>
+            <Text style={styles.bookRatings}>
+              {Number(book.ratings).toFixed(1)}
+            </Text>
+          </View>
         </View>
       </View>
-    </View>
+    </TouchableNativeFeedback>
   )
 }
 

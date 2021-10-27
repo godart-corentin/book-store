@@ -2,9 +2,13 @@ import {Portal} from 'react-native-portalize'
 import React from 'react'
 import {Dimensions, Image, StyleSheet, Text, View} from 'react-native'
 import {Modalize} from 'react-native-modalize'
-import {CloseButton} from '.'
+import {Button, CloseButton} from '.'
 
 import {Book} from '../api'
+import {useBookContext} from '../context'
+import {useNavigation} from '@react-navigation/core'
+import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs'
+import {TabParamList} from '../types'
 
 type Props = {
   book: Book | null
@@ -15,7 +19,28 @@ type Props = {
 const {height} = Dimensions.get('screen')
 const modalHeight = height * 0.8
 
+type BookBottomSheetProp = BottomTabNavigationProp<TabParamList, 'Mes Livres'>
+
 export const BookBottomSheet: React.FC<Props> = ({book, modalRef, onClose}) => {
+  const {addBoughtBook, isBookBought, closeBookModal} = useBookContext()
+  const navigation = useNavigation<BookBottomSheetProp>()
+
+  const onClickBuy = (bk: Book | null) => {
+    if (bk) {
+      addBoughtBook?.(bk)
+      closeBookModal?.(() => {
+        navigation.navigate('Mes Livres')
+      })
+    }
+  }
+
+  const isBuyButtonVisible = (bk: Book | null) => {
+    if (bk) {
+      return !isBookBought?.(bk)
+    }
+    return false
+  }
+
   return (
     <Portal>
       <Modalize
@@ -36,6 +61,23 @@ export const BookBottomSheet: React.FC<Props> = ({book, modalRef, onClose}) => {
         </View>
         <View style={styles.moreInfo}>
           {book && <Text style={styles.description}>{book.description}</Text>}
+        </View>
+        <View style={styles.buttonView}>
+          <Button
+            onPress={() => {}}
+            title="Aperçu"
+            containerStyle={styles.buttonContainerStyle}
+            icon="search"
+          />
+          <Button
+            onPress={() => {
+              onClickBuy(book)
+            }}
+            title="Acheter"
+            containerStyle={styles.buttonContainerStyle}
+            icon="cart"
+            visible={isBuyButtonVisible(book)}
+          />
         </View>
       </Modalize>
     </Portal>
@@ -99,5 +141,17 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: 'justify',
     lineHeight: 24,
+  },
+  buttonView: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    marginHorizontal: 32,
+    flex: 1,
+    marginVertical: 8,
+  },
+  buttonContainerStyle: {
+    flex: 1,
+    paddingVertical: 13,
+    paddingHorizontal: 26,
   },
 })

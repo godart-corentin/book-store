@@ -1,4 +1,20 @@
 import React from 'react'
-import {Text} from 'react-native'
+import {Book} from '../api'
+import {BookList, ScreenLayout} from '../components'
+import {useBookContext} from '../context'
 
-export const MyBooksScreen: React.FC<{}> = () => <Text>My Books</Text>
+export const MyBooksScreen: React.FC<{}> = () => {
+  const {boughtBooks, openBookModal, changeSelectedBook} = useBookContext()
+
+  const onOpenModal = (book: Book) => {
+    openBookModal?.(() => {
+      changeSelectedBook?.(book)
+    })
+  }
+
+  return (
+    <ScreenLayout>
+      <BookList title="Mes Livres" books={boughtBooks} onClick={onOpenModal} />
+    </ScreenLayout>
+  )
+}

@@ -17,6 +17,9 @@ export const BookList: React.FC<Props> = ({title, books, onClick}) => {
       {books.map(book => (
         <BookItem key={book.id} book={book} onClick={onClick} />
       ))}
+      {books.length === 0 && (
+        <Text style={styles.noBook}>Vous ne possédez aucun livre.</Text>
+      )}
     </SafeAreaView>
   )
 }
@@ -24,6 +27,7 @@ export const BookList: React.FC<Props> = ({title, books, onClick}) => {
 const styles = StyleSheet.create({
   wrapper: {
     paddingHorizontal: 32,
+    marginVertical: 32,
   },
   title: {
     fontFamily: 'Libre Caslon Text',
@@ -31,5 +35,12 @@ const styles = StyleSheet.create({
     color: '#2C1810',
     fontSize: 18,
     marginBottom: 16,
+  },
+  noBook: {
+    fontFamily: 'Montserrat',
+    fontWeight: '500',
+    color: '#2C1810',
+    fontSize: 14,
+    textAlign: 'center',
   },
 })

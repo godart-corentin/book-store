@@ -1,8 +1,6 @@
-import {Book} from '../api'
-
-export type RootStackParamList = {
+export type TabParamList = {
   Home: undefined
-  Book: {
-    book: Book
-  }
+  Rechercher: undefined
+  'Mes Favoris': undefined
+  'Mes Livres': undefined
 }

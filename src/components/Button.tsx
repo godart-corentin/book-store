@@ -6,10 +6,11 @@ import Icon from 'react-native-vector-icons/Ionicons'
 type ButtonProps = {
   onPress: () => void
   title: string
-  containerStyle?: StyleProp<ViewStyle>
-  textStyle?: StyleProp<TextStyle>
   icon?: string
   visible?: boolean
+  // style
+  containerStyle?: StyleProp<ViewStyle>
+  textStyle?: StyleProp<TextStyle>
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -45,7 +46,6 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontFamily: 'Montserrat',
     alignSelf: 'center',
-    textTransform: 'uppercase',
   },
   icon: {
     marginRight: 8,

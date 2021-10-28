@@ -1,11 +1,11 @@
 import {User} from '.'
-import {fakeUser} from '../fakeData'
+import {myUser} from './data'
 
 export class UserService {
   /**
    * Get current user data
    */
   static getCurrentUser(): User {
-    return fakeUser
+    return myUser
   }
 }

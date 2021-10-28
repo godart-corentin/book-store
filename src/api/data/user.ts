@@ -1,6 +1,6 @@
-import {User} from '../api'
+import {User} from '..'
 
-export const fakeUser: User = {
+export const myUser: User = {
   firstName: 'John',
   lastName: 'Doe',
   picture:

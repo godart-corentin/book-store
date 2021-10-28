@@ -7,4 +7,5 @@ export type Book = {
   cover: string
   price: number
   description: string
+  isbn: string
 }

@@ -14,7 +14,12 @@ export const MyBooksScreen: React.FC<{}> = () => {
 
   return (
     <ScreenLayout>
-      <BookList title="Mes Livres" books={boughtBooks} onClick={onOpenModal} />
+      <BookList
+        title="Mes Livres"
+        books={boughtBooks}
+        onClick={onOpenModal}
+        emptyMessage="Vous ne possédez aucun livre."
+      />
     </ScreenLayout>
   )
 }

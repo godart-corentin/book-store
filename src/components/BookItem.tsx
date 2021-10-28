@@ -9,6 +9,7 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons'
 
 import {Book} from '../api'
+import {MyTheme} from '../theme'
 
 type Props = {
   book: Book
@@ -21,13 +22,20 @@ export const BookItem: React.FC<Props> = ({book, onClick}): JSX.Element => {
       <View style={styles.wrapper}>
         <Image style={styles.bookCover} source={{uri: book.cover}} />
         <View style={styles.mainInfo}>
-          <Text style={styles.bookTitle} numberOfLines={1} ellipsizeMode="tail">
+          <Text
+            style={[styles.bookTitle, {color: MyTheme.colors.primaryDark}]}
+            numberOfLines={1}
+            ellipsizeMode="tail">
             {book.title}
           </Text>
 
           <Text style={styles.bookAuthors}>{book.authors[0]}</Text>
           <View style={styles.ratingsView}>
-            <Icon name="star" style={styles.ratingsIcon} size={14} />
+            <Icon
+              name="star"
+              style={[styles.ratingsIcon, {color: MyTheme.colors.primary}]}
+              size={14}
+            />
 
             <Text style={styles.bookRatings}>
               {Number(book.ratings).toFixed(1)}
@@ -61,7 +69,6 @@ const styles = StyleSheet.create({
   bookTitle: {
     fontFamily: 'Libre Caslon Text',
     fontWeight: '400',
-    color: '#2C1810',
   },
   bookAuthors: {
     fontFamily: 'Montserrat',
@@ -75,7 +82,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   ratingsIcon: {
-    color: '#DAAA63',
     marginRight: 4,
   },
   bookRatings: {

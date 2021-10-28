@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Libre Caslon Text',
     fontWeight: '400',
     color: '#2C1810',
-    fontSize: 24,
+    fontSize: 28,
     marginBottom: 16,
   },
   bookView: {

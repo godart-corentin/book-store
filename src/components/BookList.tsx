@@ -2,23 +2,34 @@ import React from 'react'
 import {SafeAreaView, StyleSheet, Text} from 'react-native'
 
 import {Book} from '../api'
+import {MyTheme} from '../theme'
 import {BookItem} from './BookItem'
 
 type Props = {
   title: string
   books: Book[]
   onClick: (book: Book) => void
+  emptyMessage: string
 }
 
-export const BookList: React.FC<Props> = ({title, books, onClick}) => {
+export const BookList: React.FC<Props> = ({
+  title,
+  books,
+  onClick,
+  emptyMessage,
+}) => {
   return (
     <SafeAreaView style={styles.wrapper}>
-      <Text style={styles.title}>{title}</Text>
+      <Text style={[styles.title, {color: MyTheme.colors.primaryDark}]}>
+        {title}
+      </Text>
       {books.map(book => (
         <BookItem key={book.id} book={book} onClick={onClick} />
       ))}
       {books.length === 0 && (
-        <Text style={styles.noBook}>Vous ne possédez aucun livre.</Text>
+        <Text style={[styles.noBook, {color: MyTheme.colors.primaryDark}]}>
+          {emptyMessage}
+        </Text>
       )}
     </SafeAreaView>
   )
@@ -32,14 +43,12 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: 'Libre Caslon Text',
     fontWeight: '400',
-    color: '#2C1810',
-    fontSize: 18,
+    fontSize: 20,
     marginBottom: 16,
   },
   noBook: {
     fontFamily: 'Montserrat',
     fontWeight: '500',
-    color: '#2C1810',
     fontSize: 14,
     textAlign: 'center',
   },

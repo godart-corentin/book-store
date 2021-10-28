@@ -8,3 +8,5 @@ export * from './HomeHeader'
 export * from './HorizontalBooks'
 export * from './BookList'
 export * from './BookBottomSheet'
+
+export * from './SearchBar'

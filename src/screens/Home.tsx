@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {StyleSheet, View} from 'react-native'
+import {View} from 'react-native'
 
 import {Book, BookService} from '../api'
 import {
@@ -9,6 +9,7 @@ import {
   ScreenLayout,
 } from '../components'
 import {useBookContext} from '../context'
+import {MyTheme} from '../theme'
 
 export const HomeScreen: React.FC<{}> = () => {
   const {openBookModal, changeSelectedBook} = useBookContext()
@@ -32,7 +33,7 @@ export const HomeScreen: React.FC<{}> = () => {
   }
   return (
     <ScreenLayout>
-      <View style={styles.backgroundView}>
+      <View style={{backgroundColor: MyTheme.colors.primaryLight}}>
         <HomeHeader />
         <HorizontalBooks
           title="Pour vous"
@@ -48,22 +49,3 @@ export const HomeScreen: React.FC<{}> = () => {
     </ScreenLayout>
   )
 }
-
-const styles = StyleSheet.create({
-  mainView: {
-    flex: 1,
-    backgroundColor: '#F3F5F9',
-  },
-  contentView: {
-    flex: 1,
-  },
-  contentContainer: {
-    flex: 1,
-    alignItems: 'center',
-  },
-  backgroundView: {
-    backgroundColor: '#EBE3DB',
-    borderBottomLeftRadius: 32,
-    borderBottomRightRadius: 32,
-  },
-})

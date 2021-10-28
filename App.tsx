@@ -5,12 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import 'react-native-gesture-handler'
 import {Host} from 'react-native-portalize'
 
-import {
-  HomeScreen,
-  MyBooksScreen,
-  MyFavoritesScreen,
-  SearchScreen,
-} from './src/screens'
+import {HomeScreen, MyBooksScreen, SearchScreen} from './src/screens'
 import {BookProvider} from './src/context'
 import {TabParamList} from './src/types'
 
@@ -31,8 +26,6 @@ export const App = () => {
                   iconName = focused ? 'home' : 'home-outline'
                 } else if (route.name === 'Rechercher') {
                   iconName = focused ? 'search' : 'search-outline'
-                } else if (route.name === 'Mes Favoris') {
-                  iconName = focused ? 'bookmarks' : 'bookmarks-outline'
                 } else if (route.name === 'Mes Livres') {
                   iconName = focused ? 'book' : 'book-outline'
                 }
@@ -63,11 +56,6 @@ export const App = () => {
             <Tab.Screen
               name="Rechercher"
               component={SearchScreen}
-              options={{headerShown: false}}
-            />
-            <Tab.Screen
-              name="Mes Favoris"
-              component={MyFavoritesScreen}
               options={{headerShown: false}}
             />
             <Tab.Screen

@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react'
 import {Image, StyleSheet, Text, View} from 'react-native'
+
 import {User, UserService} from '../api'
+import {MyTheme} from '../theme'
 
 export const HomeHeader: React.FC<{}> = () => {
   const [user, setUser] = useState<User | null>(null)
@@ -14,7 +16,9 @@ export const HomeHeader: React.FC<{}> = () => {
       {user && (
         <>
           <Image style={styles.userPicture} source={{uri: user.picture}} />
-          <Text style={styles.userName}>Bonjour {user.firstName}</Text>
+          <Text style={[styles.userName, {color: MyTheme.colors.primaryDark}]}>
+            Bonjour {user.firstName}
+          </Text>
         </>
       )}
     </View>
@@ -37,6 +41,5 @@ const styles = StyleSheet.create({
   userName: {
     fontFamily: 'Montserrat',
     fontWeight: '500',
-    color: '#2C1810',
   },
 })

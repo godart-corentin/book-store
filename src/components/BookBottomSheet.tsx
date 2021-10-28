@@ -2,13 +2,16 @@ import {Portal} from 'react-native-portalize'
 import React from 'react'
 import {Dimensions, Image, StyleSheet, Text, View} from 'react-native'
 import {Modalize} from 'react-native-modalize'
-import {Button, CloseButton} from '.'
+import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs'
+import {useNavigation} from '@react-navigation/core'
+import Moment from 'moment'
+import 'moment/locale/fr'
 
 import {Book} from '../api'
+import {Button, CloseButton} from '.'
 import {useBookContext} from '../context'
-import {useNavigation} from '@react-navigation/core'
-import {BottomTabNavigationProp} from '@react-navigation/bottom-tabs'
 import {TabParamList} from '../types'
+import {MyTheme} from '../theme'
 
 type Props = {
   book: Book | null
@@ -16,10 +19,14 @@ type Props = {
   onClose: () => void
 }
 
+// Get the dimensions of the screen
 const {height} = Dimensions.get('screen')
 const modalHeight = height * 0.8
 
+// Type for the navigation hook
 type BookBottomSheetProp = BottomTabNavigationProp<TabParamList, 'Mes Livres'>
+
+Moment.locale('fr')
 
 export const BookBottomSheet: React.FC<Props> = ({book, modalRef, onClose}) => {
   const {addBoughtBook, isBookBought, closeBookModal} = useBookContext()
@@ -34,13 +41,6 @@ export const BookBottomSheet: React.FC<Props> = ({book, modalRef, onClose}) => {
     }
   }
 
-  const isBuyButtonVisible = (bk: Book | null) => {
-    if (bk) {
-      return !isBookBought?.(bk)
-    }
-    return false
-  }
-
   return (
     <Portal>
       <Modalize
@@ -50,33 +50,79 @@ export const BookBottomSheet: React.FC<Props> = ({book, modalRef, onClose}) => {
         modalStyle={styles.modalStyle}
         rootStyle={styles.rootStyle}
         HeaderComponent={<CloseButton onClick={onClose} />}>
-        <View style={styles.mainInfo}>
+        <View
+          style={[
+            styles.mainInfo,
+            {backgroundColor: MyTheme.colors.primaryLight},
+          ]}>
           {book && (
             <>
               <Image style={styles.cover} source={{uri: book.cover}} />
-              <Text style={styles.title}>{book.title}</Text>
+              <Text style={[styles.title, {color: MyTheme.colors.primaryDark}]}>
+                {book.title}
+              </Text>
               <Text style={styles.authors}>{book.authors.join(', ')}</Text>
             </>
           )}
         </View>
         <View style={styles.moreInfo}>
-          {book && <Text style={styles.description}>{book.description}</Text>}
+          <Text style={[styles.infoTitle, {color: MyTheme.colors.primaryDark}]}>
+            Description
+          </Text>
+          {book && (
+            <Text
+              style={[styles.description, {color: MyTheme.colors.primaryDark}]}>
+              {book.description}
+            </Text>
+          )}
+        </View>
+        <View style={styles.moreInfo}>
+          <Text style={[styles.infoTitle, {color: MyTheme.colors.primaryDark}]}>
+            Informations supplémentaires
+          </Text>
+          {book && (
+            <>
+              <Text
+                style={[
+                  styles.description,
+                  {color: MyTheme.colors.primaryDark},
+                ]}>
+                ISBN: {book.isbn}
+              </Text>
+              <Text
+                style={[
+                  styles.description,
+                  {color: MyTheme.colors.primaryDark},
+                ]}>
+                Date de publication:{' '}
+                {Moment(book.date).format('[le] D MMMM YYYY')}
+              </Text>
+            </>
+          )}
         </View>
         <View style={styles.buttonView}>
           <Button
             onPress={() => {}}
-            title="Aperçu"
+            title="Lire"
             containerStyle={styles.buttonContainerStyle}
-            icon="search"
+            icon="book"
+            visible={book ? isBookBought?.(book) : false}
+          />
+          <Button
+            onPress={() => {}}
+            title="Ecouter"
+            containerStyle={styles.buttonContainerStyle}
+            icon="headset"
+            visible={book ? isBookBought?.(book) : false}
           />
           <Button
             onPress={() => {
               onClickBuy(book)
             }}
-            title="Acheter"
+            title="Ajouter à mes livres"
             containerStyle={styles.buttonContainerStyle}
-            icon="cart"
-            visible={isBuyButtonVisible(book)}
+            icon="add"
+            visible={book ? !isBookBought?.(book) : false}
           />
         </View>
       </Modalize>
@@ -93,31 +139,33 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 32,
   },
   childrenStyle: {
-    backgroundColor: '#EBE3DB',
+    backgroundColor: '#fff',
     flex: 1,
     borderTopLeftRadius: 32,
     borderTopRightRadius: 32,
   },
   mainInfo: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderBottomLeftRadius: 32,
-    borderBottomRightRadius: 32,
+    justifyContent: 'flex-end',
     paddingVertical: 32,
+    position: 'relative',
+    height: 250,
+    paddingHorizontal: 32,
+    marginBottom: 32,
   },
   cover: {
     height: 250,
     width: 163.125,
     resizeMode: 'contain',
     marginBottom: 16,
+    position: 'absolute',
+    right: 16,
+    bottom: -75,
   },
   title: {
     fontFamily: 'Libre Caslon Text',
     fontWeight: '400',
-    color: '#2C2F3D',
-    textAlign: 'center',
     fontSize: 20,
-    maxWidth: 300,
+    maxWidth: '50%',
     marginBottom: 8,
   },
   authors: {
@@ -125,19 +173,21 @@ const styles = StyleSheet.create({
     color: '#6E727D',
     fontSize: 14,
     fontWeight: '500',
-    textAlign: 'center',
+    maxWidth: '50%',
   },
   moreInfo: {
-    backgroundColor: '#FFF',
     marginHorizontal: 32,
-    borderRadius: 16,
     paddingVertical: 16,
-    paddingHorizontal: 24,
+  },
+  infoTitle: {
+    fontFamily: 'Libre Caslon Text',
+    fontWeight: '700',
+    fontSize: 16,
+    marginBottom: 16,
   },
   description: {
     fontFamily: 'Libre Caslon Text',
     fontWeight: '400',
-    color: '#2C2F3D',
     fontSize: 14,
     textAlign: 'justify',
     lineHeight: 24,

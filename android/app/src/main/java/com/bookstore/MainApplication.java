@@ -47,7 +47,6 @@ public class MainApplication extends Application implements ReactApplication {
     super.onCreate();
     SoLoader.init(this, /* native exopackage */ false);
     initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
-    ReactFontManager.getInstance().addCustomFont(this, "Inter", R.font.inter);
     ReactFontManager.getInstance().addCustomFont(this, "Montserrat", R.font.montserrat);
     ReactFontManager.getInstance().addCustomFont(this, "Libre Caslon Text", R.font.libre_caslon_text);
   }

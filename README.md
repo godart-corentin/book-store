@@ -10,8 +10,8 @@
 
 ### 🏠 [Homepage](https://github.com/godart-corentin/book-store#readme)
 
-<img src="./Screenshot1.jpg" alt="Screenshot 1" width="200"/>
-<img src="./Screenshot2.jpg" alt="Screenshot 2" width="200"/>
+<img src="./Screenshot1.png" alt="Screenshot 1" width="225"/>
+<img src="./Screenshot2.png" alt="Screenshot 2" width="225"/>
 
 ## Install
 

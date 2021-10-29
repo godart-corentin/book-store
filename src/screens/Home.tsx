@@ -45,6 +45,7 @@ export const HomeScreen: React.FC<{}> = () => {
         title="Ouvrages les mieux notés"
         books={popularBooks}
         onClick={onOpenModal}
+        emptyMessage="Il n'y a aucun livre."
       />
     </ScreenLayout>
   )

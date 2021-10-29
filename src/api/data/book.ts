@@ -1,5 +1,6 @@
 import {Book} from '../types/book'
 
+// These books were retrieved from Amazon's Top 5 Sales.
 export const myBooks: Book[] = [
   {
     id: 1,

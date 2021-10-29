@@ -1,3 +1,4 @@
+// This theme could be extended with fonts, sizes, etc...
 export const MyTheme = {
   colors: {
     primary: '#D5A55C',

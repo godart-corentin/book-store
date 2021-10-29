@@ -27,6 +27,11 @@ yarn install
 yarn android
 ```
 
+## Tested On
+
+- Android: ✔️
+- IOS: ❌
+
 ## APK
 
 - Link: [here](https://mega.nz/file/P0dTBawR#Ckj8NiAOW6oZHkcGby5mZSPab2qVAXslGrqMyneTQVg)

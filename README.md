@@ -15,6 +15,11 @@
 <img src="./Screenshot2.png" alt="Screenshot 2" width="200"/>
 </p>
 
+## Prerequisites
+
+- Android Studio
+- Set-Up the Development Environnement: [here](https://reactnative.dev/docs/environment-setup)
+
 ## Install
 
 ```sh
